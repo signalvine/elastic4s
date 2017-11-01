@@ -32,6 +32,8 @@ object SearchBuilderFn {
     search.searchType.foreach(builder.setSearchType)
     search.trackScores.foreach(builder.setTrackScores)
     search.terminateAfter.foreach(builder.setTerminateAfter)
+    if (search.searchAfter.nonEmpty)
+      builder.searchAfter(search.searchAfter.toArray)
     search.timeout.map(dur => TimeValue.timeValueNanos(dur.toNanos)).foreach(builder.setTimeout)
     search.keepAlive.foreach(builder.setScroll)
     search.version.foreach(builder.setVersion)

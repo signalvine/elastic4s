@@ -40,7 +40,7 @@ case class SearchDefinition(indexesTypes: IndexesAndTypes,
                             routing: Option[String] = None,
                             stats: Seq[String] = Nil,
                             searchType: Option[SearchType] = None,
-                            searchAfter: Seq[Any] = Nil,
+                            searchAfter: Seq[AnyRef] = Nil,
                             trackScores: Option[Boolean] = None,
                             terminateAfter: Option[Int] = None,
                             timeout: Option[Duration] = None,
@@ -70,7 +70,7 @@ case class SearchDefinition(indexesTypes: IndexesAndTypes,
   def inner(first: InnerHitDefinition, rest: InnerHitDefinition*): SearchDefinition = inner(first +: rest)
   def inner(inners: Iterable[InnerHitDefinition]): SearchDefinition = copy(inners = inners.toSeq)
 
-  def searchAfter(values: Seq[Any]): SearchDefinition = copy(searchAfter = values)
+  def searchAfter(values: Seq[AnyRef]): SearchDefinition = copy(searchAfter = values)
 
   def postFilter(block: => QueryDefinition): SearchDefinition = copy(postFilter = block.some)
 
